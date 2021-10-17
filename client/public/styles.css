@@ -1,0 +1,90 @@
+#flex-container {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+#flex-item {
+  flex: 0 0 33%;
+}
+
+#flex-item:hover {
+  cursor: pointer;
+}
+
+
+/* music player progress bar */
+
+#player{
+  background: var(--menu-color);
+  position: fixed;
+  bottom: 0;
+  height: 25vh;
+  width: 100%;
+  z-index: 50;
+}
+#bar{
+  position:relative;
+  text-align: center;
+  width:100%;
+  padding-top: 25px;
+}
+#currentTime,#totalTime{transform:translateY(-50%);padding: 0 2%;font-size: 3vh}
+@media only screen and (min-height: 500px){#currentTime,#totalTime{font-size: 2.25vh !important;}}
+#currentTime,#progress-bar,#totalTime{color: white;display: inline-block;}
+#progress-bar{
+  position: relative;
+  text-align: center;
+  height: 0.25em;
+  width: 70%;
+  border: 1px solid #222;
+  background: #333;
+  border-radius: 20px;
+  margin:0;padding:0;
+  cursor: pointer;
+  transform: translateY(-160%);
+}
+#progress{
+  height:100%;
+  width:0%;
+  background: red;
+  border-radius: 20px;
+  text-align: right;
+  transition: ease all;
+}
+#progress > i{
+  position: absolute;
+  transform: translate(-50%,-35%);
+}
+
+/* menu buttons */
+#menu{
+  position:relative;
+  text-align: center;
+  width:100%;
+  overflow: hidden;
+}
+#menu > button{
+  padding: 10px 14px;
+  border-radius: 50%;
+  border: none;
+  margin: 0 5px;
+  background: inherit;
+  color: white;
+  font-size: 20px;
+  text-align: center;
+  opacity: 0.75;
+  cursor: pointer;
+}
+#menu > button > i{
+  padding: 5px 3px 5px 5px;
+}
+#menu > button#play{
+  opacity: 1;
+  border: 2px solid white;
+}
+#menu > button:focus{
+  outline: none;
+}

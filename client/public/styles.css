@@ -25,6 +25,10 @@
   width: 100%;
   z-index: 50;
 }
+
+
+/* progress bar */
+
 #bar{
   position:relative;
   text-align: center;
@@ -59,6 +63,9 @@
   transform: translate(-50%,-35%);
 }
 
+
+
+
 /* menu buttons */
 #menu{
   position:relative;
@@ -81,7 +88,7 @@
 #menu > button > i{
   padding: 5px 3px 5px 5px;
 }
-#menu > button#play{
+#menu > button#play-pause{
   opacity: 1;
   border: 2px solid white;
 }

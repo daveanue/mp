@@ -65,7 +65,11 @@
 } */
 
 
-/* progress bar using input range*/
+/* progress & progress bar using input range*/
+
+#progress-bar {
+  width: 70%;
+}
 
 #progress {
   --bar-bg: #ffe3d4;
@@ -202,4 +206,33 @@
 }
 #menu > button:focus{
   outline: none;
+}
+
+
+/* lyric */
+
+#lyrics{
+  width: 100%;
+  height: 60vh;
+  color: var(--lyrics-color);
+  text-align: center;
+  overflow-Y: scroll;
+  font-size: 2vh;
+}
+#lyrics-content{
+  margin:0;
+  padding: 20vh 0;
+  transition: ease 0.1s all;
+}
+#lyrics h2{
+  opacity: 0.25;
+}
+#lyrics .current{
+  opacity: 1;
+  font-size: 250%;
+  transform: translateY(25%);
+}
+#lyrics .current + h2{
+  opacity: 0.5;
+  font-size: 180%;
 }

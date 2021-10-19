@@ -1,7 +1,8 @@
 import React, {useState, useRef, useEffect} from 'react';
 import MusicController from './MusicController';
-
-const PlayMusic = ({song}) => {
+import LoadLyric from './LoadLyric';
+const PlayMusic = ({musicList, prevSongIndex, currentSongIndex, setNextSongIndex, musicData}) => {
+  // console.log('what is current song', song);
   const audioPlayer = useRef();
   const progressBar = useRef();
   const animationRef = useRef();
@@ -11,13 +12,11 @@ const PlayMusic = ({song}) => {
 
 
   useEffect(() => {
-    if (song) {
       const seconds = Math.floor(audioPlayer.current.duration);
       setDuration(seconds);
       console.log('what is the progress bar', progressBar.current);
       progressBar.current.max = seconds;
-    }
-  }, [song, audioPlayer?.current?.loadedmetadata, audioPlayer?.current?.readyState])
+  }, [currentSongIndex, audioPlayer?.current?.loadedmetadata, audioPlayer?.current?.readyState])
 
   const calcTime = (secs) => {
     const minutes = Math.floor(secs / 60);
@@ -41,6 +40,18 @@ const PlayMusic = ({song}) => {
     setCurrentTime(progressBar.current.value)
   }
 
+  const toggleToPause = () => {
+    const prevValue = isPlaying;
+    setIsPlaying(!prevValue);
+    if (prevValue) {
+      audioPlayer.current.play();
+      animationRef.current = requestAnimationFrame(whileMusicPlaying);
+    } else {
+      audioPlayer.current.pause();
+      cancelAnimationFrame(animationRef.current);
+    }
+  }
+
   const togglePlayPause = () => {
     const prevValue = isPlaying;
     setIsPlaying(!prevValue);
@@ -54,31 +65,16 @@ const PlayMusic = ({song}) => {
   }
 
 
-  const SkipSong = (forwards = true) => {
-    if (forwards) {
 
-    }
-  }
 
   return (
     <React.Fragment>
-      <audio src={song} preload='metadata' ref={audioPlayer}></audio>
-      {/* <div id="player">
-      <div id="bar">
-        <div id="currentTime">{currentTime}</div>
-        <div id='progress-bar'> */}
-        {/* <div id='progress' ref={forwardedRef}><i id="progressButton" className="fa fa-circle"/></div> */}
-        {/* <input id='progress' type='range' ref={progressBar} defaultValue='0' onChange={changeRange}></input>
-        </div>
-          <div id="totalTime">{(duration && isNaN(duration)) && calcTime(duration)}</div>
-      </div> */}
-
-      {/* <div id="menu">
-        <button id="prev"><i className="fa fa-step-backward"></i></button>
-        <button id="play-pause" onClick={togglePlayPause}><i className={!isPlaying ? 'fa fa-play' : 'fa fa-pause'}></i></button>
-        <button id="next"><i className="fa fa-step-forward"></i></button>
-      </div>
-    </div> */}
+      <audio src={musicList[currentSongIndex]} preload='metadata' ref={audioPlayer}></audio>
+       <LoadLyric
+          musicData={musicData}
+          currentSongIndex={currentSongIndex}
+          currentTime={currentTime}
+       />
       <MusicController
         togglePlayPause={togglePlayPause}
         isPlaying={isPlaying}
@@ -86,6 +82,9 @@ const PlayMusic = ({song}) => {
         duration={(duration && !isNaN(duration) ? calcTime(duration) : null)}
         forwardedRef={progressBar}
         changeRange={changeRange}
+        pause={toggleToPause}
+        prev={prevSongIndex}
+        next={setNextSongIndex}
       />
     </React.Fragment>
   )

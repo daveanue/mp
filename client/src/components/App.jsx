@@ -10,14 +10,20 @@ export default class App extends React.Component {
       musicData: [],
       musicList: [],
       loadSelectMusic: null,
-      currentSongIndex: null,
-      nextSongIndex: null,
-      currentMusic: null
+      currentSongIndex: 0,
+      lyricJSON: ''
     }
     this.getMusicData = this.getMusicData.bind(this);
     this.loadSelectMusic = this.loadSelectMusic.bind(this);
     this.setNextSong = this.setNextSong.bind(this);
   }
+
+  // getLyricJSON() {
+  //   if (musicData.length > 0) {
+  //     const lyricJSON = musicData[currentSongIndex].json
+  //     this.setState({lyricJSON: lyricJSON})
+  //   }
+  // }
   getMusicData() {
     axios.get('https://jewel998.github.io/playlist/playlist.json')
     .then((resp) => {
@@ -36,33 +42,38 @@ export default class App extends React.Component {
       });
     })
   }
+
   setNextSong() {
-  const setNextSong = () => {
-    if (this.state.currentSongIndex) {
-      if (this.state.currentSongIndex + 1 > this.musicList.length - 1) {
-        return 0;
+      if (this.state.currentSongIndex + 1 > this.state.musicList.length - 1) {
+        this.setState({currentSongIndex: 0})
       } else {
-        return this.state.currentSongIndex + 1;
+        const nextSongIndex = this.state.currentSongIndex + 1;
+        this.setState({currentSongIndex: nextSongIndex})
       }
+  }
+
+  setPrevSong() {
+    if (this.state.currentSongIndex - 1 >= 0) {
+     const prevSongIndex = this.state.currentSongIndex - 1;
+      this.setState({currentSongIndex: prevSongIndex})
+    } else {
+      const lastMusicIndex = this.state.musicList.length - 1;
+      this.setState({currentSongIndex: lastMusicIndex});
     }
-   }
-   this.setState({nextSongIndex: setNextSong})
   }
   loadSelectMusic(src) {
-    // console.log('the current musicList', this.state.musicList);
     const currentSongIndex = this.state.musicList.indexOf(src)
-    const currentMusic = this.state.musicList[currentSongIndex]
     this.setState({
       loadSelectMusic: src,
       currentSongIndex: currentSongIndex,
-      currentMusic: currentMusic
-    }, () => {console.log('what is currentMusic', this.state.currentMusic)})
+    })
   }
 
   componentDidMount() {
     this.getMusicData();
     this.setNextSong();
   }
+
   render() {
     return (
       <React.Fragment>
@@ -71,7 +82,11 @@ export default class App extends React.Component {
         loadSelect={this.loadSelectMusic}
         />
         <PlayMusic
-          song={this.state.currentMusic}
+          musicList={this.state.musicList}
+          prevSongIndex={this.setPrevSong}
+          currentSongIndex={this.state.currentSongIndex}
+          setNextSongIndex={this.setNextSong}
+          musicData={this.state.musicData.length > 0 ? this.state.musicData : undefined}
         />
       </React.Fragment>
     )

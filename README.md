@@ -19,4 +19,13 @@
     <img src="https://github.com/daveanue/music-player/blob/master/Images/Lyric-2.png?raw=true" alt="Music Lyric-2" />
 </div>
 
+<br /><br />
+
+
+<h3>Installation guide</h3>
+<ul>
+    <li>Grab repository and clone</li>
+    <li>npm install after opening on desired IDE</li>
+    <li>run the following command after installation 1. npm run server 2. npm run build-prod 3. run localhost:4040 in your browser 4. VIOLAAA play some music</li>
+</ul>
 </p>

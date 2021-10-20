@@ -5,5 +5,5 @@
 
 
 <p>User can load music in the music List after clicking on the load Music button, and close it</p>
-![](https://github.com/daveanue/music-player/blob/master/Images/loadMusicList.png)
+    <img src="https://github.com/daveanue/music-player/blob/master/Images/loadMusicList.png" alt="Load Music List" />
 </p>

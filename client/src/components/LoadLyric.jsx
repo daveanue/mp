@@ -28,7 +28,7 @@ const LoadLyric = ({musicData, currentSongIndex, currentTime}) => {
       .then((result) => {
         // console.log('i want result', result.lyrics);
         setMusicLyric(result.lyrics)
-        // scrollToBottom();
+        scrollToBottom();
 
       }, [musicLyric, lyricRef, h2Ref])
 

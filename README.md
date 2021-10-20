@@ -10,6 +10,6 @@
 
 <div>
     <p>User can view music lyric while music is playing</p>
-    <img src="https://github.com/daveanue/music-player/tree/master/Images#:~:text=9%20minutes%20ago-,Lyric.png,-Add%20files%20via" alt="Music Lyric-1" />
+    <img src="https://github.com/daveanue/music-player/blob/master/Images/Lyric.png?raw=true" alt="Music Lyric-1" />
 </div>
 </p>

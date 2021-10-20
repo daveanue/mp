@@ -26,6 +26,12 @@
 <ul>
     <li>Grab repository and clone</li>
     <li>npm install after opening on desired IDE</li>
-    <li>run the following command after installation 1. npm run server 2. npm run build-prod 3. run localhost:4040 in your browser 4. VIOLAAA play some music</li>
+    <li>run the following command after installation <ul> 
+        <li>npm run server </li>
+        <li>npm run build-prod </li>
+        <li>go to localhost:4040 in your browser </li>
+        <li> VIOLAAA play some music</li>
+        </ul>    
+    </li>
 </ul>
 </p>

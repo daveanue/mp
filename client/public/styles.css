@@ -25,6 +25,10 @@
   width: 100%;
   z-index: 50;
 }
+
+
+/* progress bar */
+
 #bar{
   position:relative;
   text-align: center;
@@ -34,7 +38,8 @@
 #currentTime,#totalTime{transform:translateY(-50%);padding: 0 2%;font-size: 3vh}
 @media only screen and (min-height: 500px){#currentTime,#totalTime{font-size: 2.25vh !important;}}
 #currentTime,#progress-bar,#totalTime{color: white;display: inline-block;}
-#progress-bar{
+/* progress using div */
+/* #progress-bar{
   position: relative;
   text-align: center;
   height: 0.25em;
@@ -57,7 +62,121 @@
 #progress > i{
   position: absolute;
   transform: translate(-50%,-35%);
+} */
+
+
+/* progress & progress bar using input range*/
+
+#progress-bar {
+  width: 70%;
 }
+
+#progress {
+  --bar-bg: #ffe3d4;
+  --seek-before-width: 0;
+  --seek-before-color: #ffc2a1;
+  --knobby: #3452a5;
+  --selectedKnobby: #26c9c3;
+
+  appearance: none;
+  background: var(--bar-bg);;
+  border-radius: 10px;
+  position: relative;
+  width: 100%;
+  height: 11px;
+  outline: none;
+}
+
+/* progress bar - safari */
+#progress::-webkit-slider-runnable-track {
+  background: var(--bar-bg);;
+  border-radius: 10px;
+  position: relative;
+  width: 100%;
+  height: 11px;
+  outline: none;
+}
+
+/* progress bar - firefox */
+#progress::-moz-range-track {
+  background: var(--bar-bg);;
+  border-radius: 10px;
+  position: relative;
+  width: 100%;
+  height: 11px;
+  outline: none;
+}
+
+#progress::-moz-focus-outer {
+  border: 0;
+}
+
+/* progress bar - chrome and safari */
+#progress::before {
+  content: '';
+  height: 11px;
+  width: var(--seek-before-width);
+  background-color: var(--seek-before-color);
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 2;
+  cursor: pointer;
+}
+
+/* progress bar - firefox */
+#progress::-moz-range-progress {
+  background-color: var(--seek-before-color);
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+  height: 11px;
+}
+
+/* knobby - chrome and safari */
+#progress::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  height: 15px;
+  width: 15px;
+  border-radius: 50%;
+  border: none;
+  background-color: var(--knobby);
+  cursor: pointer;
+  position: relative;
+  margin: -2px 0 0 0;
+  z-index: 3;
+  box-sizing: border-box;
+}
+
+/* knobby while dragging - chrome and safari */
+#progress:active::-webkit-slider-thumb {
+  transform: scale(1.2);
+  background: var(--selectedKnobby);
+}
+
+/* knobby - firefox */
+#progress::-moz-range-thumb {
+  height: 15px;
+  width: 15px;
+  border-radius: 50%;
+  border: transparent;
+  background-color: var(--knobby);
+  cursor: pointer;
+  position: relative;
+  z-index: 3;
+  box-sizing: border-box;
+}
+
+/* knobby while dragging - firefox */
+#progress:active::-moz-range-thumb {
+  transform: scale(1.2);
+  background: var(--selectedKnobby);
+}
+
+
+
+
 
 /* menu buttons */
 #menu{
@@ -81,10 +200,51 @@
 #menu > button > i{
   padding: 5px 3px 5px 5px;
 }
-#menu > button#play{
+#menu > button#play-pause{
   opacity: 1;
   border: 2px solid white;
 }
 #menu > button:focus{
   outline: none;
+}
+
+
+/* lyric */
+
+#lyrics{
+  width: 100%;
+  height: 60vh;
+  color: var(--lyrics-color);
+  text-align: center;
+  overflow-Y: scroll;
+  font-size: 2vh;
+}
+#lyrics-content{
+  margin:0;
+  padding: 20vh 0;
+  transition: ease 0.1s all;
+}
+#lyrics h2{
+  opacity: 0.25;
+}
+#lyrics .current{
+  opacity: 1;
+  font-size: 250%;
+  transform: translateY(25%);
+}
+#lyrics .current + h2{
+  opacity: 0.5;
+  font-size: 180%;
+}
+
+#lyrics::-webkit-scrollbar,#show-box::-webkit-scrollbar{
+  width:5px;
+}
+#lyrics::-webkit-scrollbar-track,#show-box::-webkit-scrollbar-track{
+  -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+}
+#lyrics::-webkit-scrollbar-thumb,#show-box::-webkit-scrollbar-thumb{
+  background-color: darkgrey;
+  outline: 1px solid slategrey;
+  border-radius: 15px;
 }

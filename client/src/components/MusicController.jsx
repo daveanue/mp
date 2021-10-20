@@ -1,29 +1,23 @@
-import React from 'react';
+import React, {useState, useRef, useEffect} from 'react';
 
-export default class MusicController extends React.Component {
-  constructor(props) {
-    super(props);
-  }
+const MusicController = ({isPlaying, duration, togglePlayPause, currentTime, forwardedRef, changeRange, pause, prev, next}) => {
 
-
-  render() {
     return (
       <div id="player">
       <div id="bar">
-        <div id="currentTime"></div>
-        <div id="progress-bar">
-          <div id="progress"><i id="progressButton" className="fa fa-circle"></i></div>
+        <div id="currentTime">{currentTime}</div>
+        <div id='progress-bar'>
+        <input id='progress' type='range' ref={forwardedRef} defaultValue='0' onChange={changeRange}></input>
         </div>
-        <div id="totalTime"></div>
+          <div id="totalTime">{duration}</div>
       </div>
       <div id="menu">
-        <button id="repeat" style={{color: 'grey'}}><i className="fa fa-repeat"></i></button>
-        <button id="prev"><i className="fa fa-step-backward"></i></button>
-        <button id="play"><i className="fa fa-play"></i></button>
-        <button id="next"><i className="fa fa-step-forward"></i></button>
-        <button id="shuffle" style={{color: 'grey'}}><i className="fa fa-random"></i></button>
+        <button id="prev" onClick={() => {prev(); pause();}}><i className="fa fa-step-backward"></i></button>
+        <button id="play-pause" onClick={togglePlayPause}><i className={!isPlaying ? 'fa fa-play' : 'fa fa-pause'}></i></button>
+        <button id="next" onClick={() => {next(); pause();} }><i className="fa fa-step-forward"></i></button>
       </div>
     </div>
     )
-  }
 }
+
+export default MusicController;

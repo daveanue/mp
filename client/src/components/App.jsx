@@ -11,19 +11,14 @@ export default class App extends React.Component {
       musicList: [],
       loadSelectMusic: null,
       currentSongIndex: 0,
-      lyricJSON: ''
+      musicLyric: []
     }
     this.getMusicData = this.getMusicData.bind(this);
     this.loadSelectMusic = this.loadSelectMusic.bind(this);
     this.setNextSong = this.setNextSong.bind(this);
   }
 
-  // getLyricJSON() {
-  //   if (musicData.length > 0) {
-  //     const lyricJSON = musicData[currentSongIndex].json
-  //     this.setState({lyricJSON: lyricJSON})
-  //   }
-  // }
+
   getMusicData() {
     axios.get('https://jewel998.github.io/playlist/playlist.json')
     .then((resp) => {
@@ -41,7 +36,12 @@ export default class App extends React.Component {
         musicList: musicList
       });
     })
+    .catch((err) => {
+      console.error(err);
+    })
   }
+
+
 
   setNextSong() {
       if (this.state.currentSongIndex + 1 > this.state.musicList.length - 1) {

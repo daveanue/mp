@@ -236,3 +236,15 @@
   opacity: 0.5;
   font-size: 180%;
 }
+
+#lyrics::-webkit-scrollbar,#show-box::-webkit-scrollbar{
+  width:5px;
+}
+#lyrics::-webkit-scrollbar-track,#show-box::-webkit-scrollbar-track{
+  -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+}
+#lyrics::-webkit-scrollbar-thumb,#show-box::-webkit-scrollbar-thumb{
+  background-color: darkgrey;
+  outline: 1px solid slategrey;
+  border-radius: 15px;
+}

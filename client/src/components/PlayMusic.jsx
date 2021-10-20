@@ -1,7 +1,7 @@
 import React, {useState, useRef, useEffect} from 'react';
 import MusicController from './MusicController';
 import LoadLyric from './LoadLyric';
-const PlayMusic = ({musicList, prevSongIndex, currentSongIndex, setNextSongIndex, musicData}) => {
+const PlayMusic = ({musicList, prevSongIndex, currentSongIndex, setNextSongIndex, musicData, musicLyric}) => {
   // console.log('what is current song', song);
   const audioPlayer = useRef();
   const progressBar = useRef();
@@ -9,7 +9,6 @@ const PlayMusic = ({musicList, prevSongIndex, currentSongIndex, setNextSongIndex
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
-
 
   useEffect(() => {
       const seconds = Math.floor(audioPlayer.current.duration);
@@ -72,6 +71,7 @@ const PlayMusic = ({musicList, prevSongIndex, currentSongIndex, setNextSongIndex
       <audio src={musicList[currentSongIndex]} preload='metadata' ref={audioPlayer}></audio>
        <LoadLyric
           musicData={musicData}
+          musicLyric={musicLyric}
           currentSongIndex={currentSongIndex}
           currentTime={currentTime}
        />

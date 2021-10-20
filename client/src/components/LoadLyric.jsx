@@ -1,8 +1,9 @@
 import React, {useState, useEffect, useRef} from 'react';
 import axios from 'axios';
 const LoadLyric = ({musicData, currentSongIndex, currentTime}) => {
-  const lyricRef = useRef();
+
   const [musicLyric, setMusicLyric] = useState([]);
+
 
   useEffect(() => {
     if (musicData && musicData.length > 0) {
@@ -19,12 +20,30 @@ const LoadLyric = ({musicData, currentSongIndex, currentTime}) => {
         setMusicLyric(result.lyrics)
       })
     }
-  },[currentSongIndex])
 
-  console.log('currentTime', currentTime);
+
+  },[currentSongIndex, musicLyric])
+
   return (
     <div id="lyrics">
-          <div ref={lyricRef} id="lyrics-content">
+          <div id="lyrics-content">
+            {musicLyric.length > 0 &&  musicLyric.map((lyric, i, array) => {
+               var next = i + 1;
+
+              if (next > array.length) {
+                next = next;
+              } else {
+                next = next - 1;
+              }
+              return (
+                <h2
+                key={i}
+                className={(lyric.time / 1000)  >= currentTime  && currentTime <= (musicLyric[next].time / 1000) ? 'current' : null}
+                >
+                  {lyric.line}
+                </h2>
+              )
+            })}
           </div>
      </div>
   )

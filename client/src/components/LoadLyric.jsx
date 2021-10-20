@@ -52,7 +52,7 @@ const LoadLyric = ({musicData, currentSongIndex, currentTime}) => {
                 ref={h2Ref}
                 key={i}
                 // id={musicLyric[i].time}
-                className={parseInt(musicLyric[i].time / 1000) >= currentTime ? 'current' : null && scrollToBottom(musicLyric[i])}
+                className={parseInt(musicLyric[i].time / 1000) >= currentTime ? 'current' : null}
                 >
                   {lyric.line}
                 </h2>

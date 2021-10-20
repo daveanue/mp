@@ -14,4 +14,9 @@
     <img src="https://github.com/daveanue/music-player/blob/master/Images/Lyric.png?raw=true" alt="Music Lyric-1" />
 </div>
 
+<div>
+    <p>Lyric image - 2 while music is playing</p>
+    <img src="https://github.com/daveanue/music-player/blob/master/Images/Lyric-2.png?raw=true" alt="Music Lyric-2" />
+</div>
+
 </p>

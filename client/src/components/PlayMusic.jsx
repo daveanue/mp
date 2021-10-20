@@ -13,7 +13,6 @@ const PlayMusic = ({musicList, prevSongIndex, currentSongIndex, setNextSongIndex
   useEffect(() => {
       const seconds = Math.floor(audioPlayer.current.duration);
       setDuration(seconds);
-      console.log('what is the progress bar', progressBar.current);
       progressBar.current.max = seconds;
   }, [currentSongIndex, audioPlayer?.current?.loadedmetadata, audioPlayer?.current?.readyState])
 

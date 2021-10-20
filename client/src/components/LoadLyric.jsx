@@ -2,8 +2,18 @@ import React, {useState, useEffect, useRef} from 'react';
 import axios from 'axios';
 const LoadLyric = ({musicData, currentSongIndex, currentTime}) => {
 
+  const lyricRef = useRef()
+  const h2Ref = useRef()
   const [musicLyric, setMusicLyric] = useState([]);
 
+  const scrollToBottom = (lyricToScrollTo) => {
+    lyricRef.current.scrollIntoView(lyricToScrollTo)
+    lyricRef.current.scrollIntoView({
+      behavior: "smooth",
+      block: "nearest",
+      inline: "start"
+    });
+  }
 
   useEffect(() => {
     if (musicData && musicData.length > 0) {
@@ -18,17 +28,19 @@ const LoadLyric = ({musicData, currentSongIndex, currentTime}) => {
       .then((result) => {
         // console.log('i want result', result.lyrics);
         setMusicLyric(result.lyrics)
-      })
+        // scrollToBottom();
+
+      }, [musicLyric, lyricRef, h2Ref])
+
     }
-
-
   },[currentSongIndex, musicLyric])
 
   return (
-    <div id="lyrics">
+    <div ref={lyricRef} id="lyrics">
           <div id="lyrics-content">
             {musicLyric.length > 0 &&  musicLyric.map((lyric, i, array) => {
                var next = i + 1;
+               const current = i;
 
               if (next > array.length) {
                 next = next;
@@ -37,8 +49,10 @@ const LoadLyric = ({musicData, currentSongIndex, currentTime}) => {
               }
               return (
                 <h2
+                ref={h2Ref}
                 key={i}
-                className={(lyric.time / 1000)  >= currentTime  && currentTime <= (musicLyric[next].time / 1000) ? 'current' : null}
+                // id={musicLyric[i].time}
+                className={parseInt(musicLyric[i].time / 1000) >= currentTime ? 'current' : null && scrollToBottom(musicLyric[i])}
                 >
                   {lyric.line}
                 </h2>
